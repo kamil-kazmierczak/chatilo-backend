@@ -1,36 +1,33 @@
 package me.kmilo.chatilo;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Log4j2
 public class ChatController {
 
     @Autowired
-    SimpMessagingTemplate template;
+    SimpMessagingTemplate simpMessagingTemplate;
+
 
     @PostMapping("/send")
     @CrossOrigin
-    public void sendMessage(@RequestBody TextMessage textMessage) {
-        template.convertAndSend("/topic/message", textMessage);
-    }
+    public TextMessage send(@RequestBody TextMessage textMessage) {
+        log.error("MESSAGE SEND: {}", textMessage);
+        simpMessagingTemplate.convertAndSend("/topic/message", textMessage);
 
-    @MessageMapping("/sendMessage")
-    public void receiveMessage(@Payload TextMessage textMessage) {
-        // receive message from client
-    }
-
-
-    @SendTo("/topic/message")
-    public TextMessage broadcastMessage(@Payload TextMessage textMessage) {
         return textMessage;
+    }
+
+    @GetMapping("/basicauth")
+    @CrossOrigin
+    public void auth() {
+        log.error("SUCCESS");
     }
 
 }
