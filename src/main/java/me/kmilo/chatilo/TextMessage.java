@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class TextMessage {
 
     private String message;
-    private LocalDateTime localDateTime = LocalDateTime.now();
+    private long time = Instant.now().toEpochMilli();
     private String userId;
     private String roomNumber;
 }
