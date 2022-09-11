@@ -1,4 +1,4 @@
-package pl.chatilo.app;
+package me.kmilo.chatilo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

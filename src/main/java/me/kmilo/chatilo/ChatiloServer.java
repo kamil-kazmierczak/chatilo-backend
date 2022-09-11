@@ -1,13 +1,13 @@
-package pl.chatilo.app;
+package me.kmilo.chatilo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChatiloApplication {
+public class ChatiloServer {
 
     public static void main(String[] args) {
-        SpringApplication.run(ChatiloApplication.class, args);
+        SpringApplication.run(ChatiloServer.class, args);
     }
 
 }

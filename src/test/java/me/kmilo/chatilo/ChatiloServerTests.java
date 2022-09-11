@@ -1,10 +1,10 @@
-package pl.chatilo.app;
+package me.kmilo.chatilo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChatiloApplicationTests {
+class ChatiloServerTests {
 
     @Test
     void contextLoads() {
