@@ -12,6 +12,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class UserDetailsImpl implements UserDetails {
 
     String id;

@@ -1,4 +1,4 @@
-package me.kmilo.chatilo.security;
+package me.kmilo.chatilo.websocket;
 
 import me.kmilo.chatilo.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
@@ -28,8 +28,11 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
 //                .nullDestMatcher().authenticated()
                 .simpSubscribeDestMatchers("/user/queue/errors").permitAll()
                 .simpSubscribeDestMatchers("/topic/**").permitAll()
+                .simpSubscribeDestMatchers("/queue/**").permitAll()
+                .simpSubscribeDestMatchers("/user/**").permitAll()
+                .simpSubscribeDestMatchers("/all/**").permitAll()
                 .simpSubscribeDestMatchers("*/**").permitAll()
-                .simpDestMatchers("*/**").permitAll();
+                .simpDestMatchers("*").permitAll();
 //                .simpDestMatchers("/app/**").hasRole("USER")
 //                .simpSubscribeDestMatchers("/user/**", "/topic/friends/*").hasRole("USER")
 //                .simpTypeMatchers(MESSAGE, SUBSCRIBE).denyAll()

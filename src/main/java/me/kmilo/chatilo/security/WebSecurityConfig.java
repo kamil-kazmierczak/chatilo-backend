@@ -10,6 +10,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -30,6 +31,8 @@ public class WebSecurityConfig {
                         .antMatchers(HttpMethod.POST, "/login").permitAll()
                         .anyRequest().authenticated()
                 )
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                .and()
                 .httpBasic()
                 .authenticationEntryPoint(basicAuthEntryPoint());
 

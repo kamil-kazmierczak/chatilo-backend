@@ -9,26 +9,21 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+
 @RestController
 @Log4j2
 public class ChatController {
 
     @Autowired
-    SimpMessagingTemplate simpMessagingTemplate;
+    SimpMessagingTemplate simpMessagingTemplate; // may be used to manual sending msg
 
-    @SendTo("/topic/message")
-    public TextMessage broadcastMessage(@Payload TextMessage textMessageDTO) {
-        return textMessageDTO;
-    }
-
-
-    @PostMapping("/send")
-    @CrossOrigin
-    public TextMessage send(@RequestBody @Payload TextMessage textMessage) {
-        log.error("MESSAGE SEND: {}", textMessage);
-        simpMessagingTemplate.convertAndSend("/topic/message", textMessage);
-
-        return textMessage;
+    @MessageMapping("/all") // message from frontend-client /app/all
+    @SendTo("/topic/message") // message send next after retrieving
+    public TextMessage broadcastMessage(@Payload TextMessage textMessage) {
+        return textMessage.toBuilder()
+                .time(Instant.now().toEpochMilli())
+                .build();
     }
 
 }

@@ -10,17 +10,17 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/chatilo-websocket")
-                .setAllowedOriginPatterns("*")
-//                .setAllowedOrigins("http://localhost:3000")
-                .withSockJS();
+                .setAllowedOriginPatterns("*");
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic");
+        registry.enableSimpleBroker("/topic", "/queue", "/dupa");
+        registry.setUserDestinationPrefix("/user");
         registry.setApplicationDestinationPrefixes("/app");
     }
 }

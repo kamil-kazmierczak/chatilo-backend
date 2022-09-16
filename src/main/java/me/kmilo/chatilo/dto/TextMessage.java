@@ -1,20 +1,15 @@
 package me.kmilo.chatilo.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.Instant;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@Builder(toBuilder = true)
 public class TextMessage {
-
+    private String from;
     private String message;
-    private long time = Instant.now().toEpochMilli();
-    private String userId;
-    private String roomNumber;
+    private long time;
 }
