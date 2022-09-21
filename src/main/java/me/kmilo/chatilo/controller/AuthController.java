@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 public class AuthController {
 
-    @GetMapping("/auth")
-    @CrossOrigin
+    @GetMapping("/api/auth")
     public ResponseEntity<Void> auth() {
         log.info("Login success!");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

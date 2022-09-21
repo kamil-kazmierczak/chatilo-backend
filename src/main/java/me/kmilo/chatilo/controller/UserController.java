@@ -13,8 +13,7 @@ import java.security.Principal;
 @Log4j2
 public class UserController {
 
-    @GetMapping("/user")
-    @CrossOrigin
+    @GetMapping("/api/user")
     public UserDto getCurrentUser(@AuthenticationPrincipal UserDetailsImpl principal) {
         return UserDto.builder()
                 .id(principal.getId())
