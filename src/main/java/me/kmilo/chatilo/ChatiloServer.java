@@ -25,5 +25,12 @@ public class ChatiloServer implements CommandLineRunner {
                 .username("kmilo")
                 .password("pass")
                 .build());
+
+        userRepository.save(UserEntity.builder()
+                .id("345")
+                .email("just.minias@gmail.com")
+                .username("Just")
+                .password("password")
+                .build());
     }
 }
