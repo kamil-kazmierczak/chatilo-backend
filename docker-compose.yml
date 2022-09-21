@@ -1,0 +1,57 @@
+version: '2'
+
+services:
+  chatilo-server:
+    image: 'chatilo-server:latest'
+    build:
+      context: .
+    container_name: chatilo-server
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/chatilodb
+      - SPRING_DATASOURCE_USERNAME=postgresql
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=8080
+
+  chatilo-client:
+    image: 'chatilo-client-image'
+    build:
+      context: ../chatilo-client
+    container_name: chatilo-client
+    restart: always
+    ports:
+      - '80:80'
+    depends_on:
+      - chatilo-server
+    command: nginx -g "daemon off;"
+
+  db:
+    image: 'postgres:14.0-alpine'
+    container_name: db
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgresql
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=chatilodb
+
+  pgadmin:
+    image: 'dpage/pgadmin4'
+    container_name: pgadmin
+    restart: always
+    ports:
+      - '8000:80'
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgresql@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:
