@@ -25,6 +25,7 @@ services:
     restart: always
     ports:
       - '80:80'
+      - '3000:3000'
     depends_on:
       - chatilo-server
     command: nginx -g "daemon off;"
