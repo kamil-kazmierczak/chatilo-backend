@@ -14,6 +14,7 @@ import java.security.Principal;
 public class UserController {
 
     @GetMapping("/api/user")
+    @CrossOrigin
     public UserDto getCurrentUser(@AuthenticationPrincipal UserDetailsImpl principal) {
         return UserDto.builder()
                 .id(principal.getId())

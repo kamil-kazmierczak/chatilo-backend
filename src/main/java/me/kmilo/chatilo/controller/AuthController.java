@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @GetMapping("/api/auth")
+    @CrossOrigin
     public ResponseEntity<Void> auth() {
         log.info("Login success!");
         return new ResponseEntity<>(HttpStatus.OK);
