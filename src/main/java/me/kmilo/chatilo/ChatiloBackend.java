@@ -9,12 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @RequiredArgsConstructor
-public class ChatiloServer implements CommandLineRunner {
+public class ChatiloBackend implements CommandLineRunner {
 
     private final UserRepository userRepository;
 
     public static void main(String[] args) {
-        SpringApplication.run(ChatiloServer.class, args);
+        SpringApplication.run(ChatiloBackend.class, args);
     }
 
     @Override
