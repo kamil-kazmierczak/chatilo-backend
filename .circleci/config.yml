@@ -6,4 +6,4 @@ jobs:
       - image: cimg/openjdk:17.0.4
     steps:
       - checkout
-      - run: java --version; ssh kmilo@kmilo.me
+      - run: java --version; ssh-keyscan kmilo.me >> $HOME/.ssh/known_hosts; ssh kmilo@kmilo.me
