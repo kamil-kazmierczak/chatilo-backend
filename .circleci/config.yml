@@ -16,7 +16,9 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh kmilo@kmilo.me "echo DONE"
+            ssh kmilo@kmilo.me
+            cd chatilo
+            ./deploy.sh
 
 workflows:
   version: 2
