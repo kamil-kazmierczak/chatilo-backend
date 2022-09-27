@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run: java --version
   deploy-job:
-    executor: machine
+    machine: true
     steps:
       - add_ssh_keys:
           fingerprints:
