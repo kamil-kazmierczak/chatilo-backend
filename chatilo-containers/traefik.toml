@@ -6,8 +6,6 @@
 [entryPoints]
   [entryPoints.web]
     address = ":80"
-  [entrypoints.front]
-    address = ":3000"
   [entrypoints.backend]
     address = ":8081"
   [entrypoints.pgadmin]
