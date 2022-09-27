@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "JetBrains Mono";
+    src: local("JetBrains Mono"),
+    url("./fonts/JetBrainsMono-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Helvetica Neue";
+    src: local("Helvetica Neue"),
+    url("./fonts/HelveticaNeueMediumExtended.ttf") format("truetype");
+    font-weight: normal;
+}

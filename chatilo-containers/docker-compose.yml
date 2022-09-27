@@ -1,0 +1,85 @@
+version: "3.3"
+
+services:
+  traefik:
+    image: "traefik:v2.8.7"
+    container_name: traefik
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "8081:8081"
+      - "5433:5433"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./traefik.toml:/traefik.toml"
+      - './traefik_dynamic.toml:/traefik_dynamic.toml'
+
+  whoami:
+    image: "traefik/whoami"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`kmilo.me`)"
+      - "traefik.http.services.whoami.loadbalancer.server.port=80"
+
+  backend:
+    image: 'chatilo-backend-image'
+    build:
+      context: ../chatilo-backend
+    container_name: backend
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/chatilodb
+      - SPRING_DATASOURCE_USERNAME=postgresql
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=8081
+    labels:
+      - "traefik.http.routers.backend.rule=Host(`chat.kmilo.me`)"
+      - "traefik.http.routers.backend.entrypoints=backend,front"
+      - "traefik.http.services.backend.loadbalancer.server.port=8081"
+
+  db:
+    image: 'postgres:14.0-alpine'
+    container_name: db
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgresql
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=chatilodb
+
+  pgadmin:
+    image: 'dpage/pgadmin4'
+    container_name: pgadmin
+    restart: always
+    ports:
+      - '5433:5433'
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgresql@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_LISTEN_PORT=5433
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    labels:
+      - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.chat.kmilo.me`)"
+      - "traefik.http.routers.pgadmin.entrypoints=pgadmin"
+      - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
+
+  frontend:
+    image: 'chatilo-client-image'
+    build:
+      context: ../chatilo-frontend
+    container_name: frontend
+    restart: always
+    depends_on:
+      - backend
+    command: nginx -g "daemon off;"
+    labels:
+      - "traefik.http.routers.frontend.rule=Host(`chat.kmilo.me`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+ 
+volumes:
+  db-data:
+  pgadmin-data:

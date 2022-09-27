@@ -1,0 +1,22 @@
+[log]
+  level = "DEBUG"
+
+[accessLog]
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+  [entrypoints.front]
+    address = ":3000"
+  [entrypoints.backend]
+    address = ":8081"
+  [entrypoints.pgadmin]
+    address = ":5433"
+
+[api]
+  dashboard = true
+  insecure = true
+
+[providers.docker]
+  watch = true
+  exposedByDefault = true

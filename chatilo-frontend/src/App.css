@@ -1,0 +1,41 @@
+.navbar-border-bottom {
+    border-bottom: 1px solid rgba(0,0,0, 0.17);
+}
+
+.custom-font {
+    font-family: "Helvetica Neue", monospace;
+}
+
+#messages-area * {
+    overflow-anchor: none;
+}
+
+#send-area {
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 30;
+    bottom: 0;
+    overflow-anchor: auto;
+    align-items: stretch;
+    display: flex;
+    min-height: 3.25rem;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+.message-field {
+    border: 1px solid cadetblue;
+    padding: 1rem;
+    border-radius: 20px 3px 3px 20px;
+    background-color: cadetblue;
+    color: whitesmoke;
+    font-size: 16px;
+    align-items: end;
+    width: fit-content;
+    margin: 0.6rem 0.6rem 0.6rem auto;
+}
+
+#inputMessage {
+    margin-right: 1rem;
+}
