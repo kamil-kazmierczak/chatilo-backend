@@ -17,3 +17,15 @@ jobs:
           name: Deploy Over SSH
           command: |
             ssh kmilo@kmilo.me "echo DONE"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy-job:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
