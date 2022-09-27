@@ -7,3 +7,13 @@ jobs:
     steps:
       - checkout
       - run: java --version
+  deploy-job:
+    executor: machine
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "af:42:0f:9c:83:90:1a:6e:0e:17:81:31:c1:28:53:56"
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh kmilo@kmilo.me "echo DONE"
