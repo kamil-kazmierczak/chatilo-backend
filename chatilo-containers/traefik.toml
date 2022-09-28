@@ -9,7 +9,6 @@
 
   [entryPoints.websecure]
     address = ":443"
-    [entryPoints.websecure.tls]
 
   [entryPoints.backend]
     address = ":8081"
