@@ -66,7 +66,8 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     labels:
       - "traefik.http.routers.pgadmin.rule=Host(`pgadmin.chat.kmilo.me`)"
-      - "traefik.http.routers.pgadmin.entrypoints=web"
+      - "traefik.http.routers.pgadmin.entrypoints=websecure"
+      - "traefik.http.routers.pgadmin.tls.certresolver=myresolver"
       - "traefik.http.services.pgadmin.loadbalancer.server.port=5433"
 
   frontend:
