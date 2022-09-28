@@ -80,6 +80,7 @@ services:
     command: nginx -g "daemon off;"
     labels:
       - "traefik.http.routers.frontend.rule=Host(`chat.kmilo.me`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
 
