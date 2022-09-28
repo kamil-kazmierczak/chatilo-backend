@@ -32,4 +32,4 @@
 
 [providers.docker]
   watch = true
-  exposedByDefault = true
+  exposedByDefault = false
