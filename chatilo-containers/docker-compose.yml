@@ -14,7 +14,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./traefik.toml:/traefik.toml"
       - './traefik_dynamic.toml:/traefik_dynamic.toml'
-      = "./letsencrypt:/letsencrypt"
+      - "./letsencrypt:/letsencrypt"
 
   whoami:
     image: "traefik/whoami"
