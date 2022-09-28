@@ -1,0 +1,36 @@
+[http]
+    [http.routers]
+        [http.routers.whoami]
+#            middlewares = ["foobar", "foobar"]
+#            service = "foobar"
+            rule = "Host(`kmilo.me`)"
+            entryPoints = ["websecure"]
+            [http.routers.whoami.tls]
+                certResolver = "myresolver"
+
+        [http.routers.backend]
+            rule = "Host(`chat.kmilo.me`)"
+            entrypoints = ["backend"]
+
+        [http.routers.frontend]
+            rule = "Host(`chat.kmilo.me`)"
+            entrypoints = ["websecure"]
+            [http.routers.frontend.tls]
+                certResolver = "myresolver"
+
+        [http.routers.pgadmin]
+            rule = "Host(`pgadmin.chat.kmilo.me`)"
+            entrypoints = ["web"]
+
+    [http.services]
+        [http.services.whoami.loadbalancer.server]
+            port = 80
+
+        [http.services.backend.loadbalancer.server]
+            port = 8081
+
+        [http.services.frontend.loadbalancer.server]
+            port = 80
+
+        [http.services.pgadmin.loadbalancer.server]
+            port = 5433
