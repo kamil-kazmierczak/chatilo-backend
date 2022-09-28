@@ -4,12 +4,21 @@
 [accessLog]
 
 [entryPoints]
-  [entryPoints.web]
+  [entrypoints.web]
     address = ":80"
+
+  [entryoints.websecure]
+    address = ":443"
+
   [entrypoints.backend]
     address = ":8081"
+
   [entrypoints.pgadmin]
     address = ":5433"
+
+[certificatesresolvers.myresolver.acme]
+  email = "kazmierczak.kamil1996@gmail.com"
+  storage = "/letsencrypt/acme.json"
 
 [api]
   dashboard = true
