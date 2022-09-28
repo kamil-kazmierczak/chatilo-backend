@@ -13,8 +13,13 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./traefik.toml:/traefik.toml"
-      - './traefik_dynamic.toml:/traefik_dynamic.toml'
+      - "./traefik_dynamic.toml:/traefik_dynamic.toml"
       - "./letsencrypt:/letsencrypt"
+    labels:
+      - "traefik.http.routers.api.rule=Host(`traefik.chat.kmilo.me`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls.certresolver=myresolver"
+      - "traefik.http.routers.api.service=api@internal"
 
   whoami:
     image: "traefik/whoami"
