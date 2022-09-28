@@ -6,6 +6,9 @@
 [entryPoints]
   [entryPoints.web]
     address = ":80"
+    [entryPoints.web.redirections.entrypoint]
+      to = "websecure"
+      scheme = "https"
 
   [entryPoints.websecure]
     address = ":443"
