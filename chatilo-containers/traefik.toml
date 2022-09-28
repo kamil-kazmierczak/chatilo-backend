@@ -4,16 +4,16 @@
 [accessLog]
 
 [entryPoints]
-  [entrypoints.web]
+  [entryPoints.web]
     address = ":80"
 
-  [entryoints.websecure]
+  [entryPoints.websecure]
     address = ":443"
 
-  [entrypoints.backend]
+  [entryPoints.backend]
     address = ":8081"
 
-  [entrypoints.pgadmin]
+  [entryPoints.pgadmin]
     address = ":5433"
 
 [certificatesresolvers.myresolver.acme]
