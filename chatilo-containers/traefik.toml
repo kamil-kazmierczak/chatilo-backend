@@ -9,6 +9,7 @@
 
   [entryPoints.websecure]
     address = ":443"
+    [entryPoints.websecure.tls]
 
   [entryPoints.backend]
     address = ":8081"
@@ -16,9 +17,12 @@
   [entryPoints.pgadmin]
     address = ":5433"
 
-[certificatesresolvers.myresolver.acme]
+[certificatesResolvers.myresolver.acme]
   email = "kazmierczak.kamil1996@gmail.com"
   storage = "/letsencrypt/acme.json"
+
+  [certificatesResolvers.myresolver.acme.httpChallenge]
+    entryPoint = "web"
 
 [api]
   dashboard = true
