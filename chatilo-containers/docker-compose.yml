@@ -17,8 +17,7 @@ services:
       - "./letsencrypt:/letsencrypt"
     labels:
       - "traefik.http.routers.api.rule=Host(`traefik.chat.kmilo.me`)"
-      - "traefik.http.routers.api.entrypoints=websecure"
-      - "traefik.http.routers.api.tls.certresolver=myresolver"
+      - "traefik.http.routers.api.entrypoints=web"
       - "traefik.http.routers.api.service=api@internal"
 
   whoami:
