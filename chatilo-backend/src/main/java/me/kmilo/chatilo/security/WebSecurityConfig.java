@@ -24,17 +24,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
                                                    AuthenticationProvider authenticationProvider) throws Exception {
         httpSecurity
-                .csrf().disable()
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .antMatchers("/chatilo-websocket/**").permitAll()
-                        .antMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/chatilo-websocket/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                .and()
-                .httpBasic()
-                .authenticationEntryPoint(basicAuthEntryPoint());
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .httpBasic(httpBasic -> httpBasic.authenticationEntryPoint(basicAuthEntryPoint()));
 
         return httpSecurity
                 .authenticationProvider(authenticationProvider)
