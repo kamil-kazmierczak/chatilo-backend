@@ -5,7 +5,7 @@ import UserService from "./services/user-service";
 import AuthenticationService from "./services/authentication-service";
 import {Client as WebSocketClient} from '@stomp/stompjs';
 
-const SOCKET_URL = 'ws://chat.kmilo.me:8081/chatilo-websocket'
+const SOCKET_URL = 'ws://localhost:8081/chatilo-websocket'
 const TOPIC_NAME = '/topic/message'
 
 const App = () => {
