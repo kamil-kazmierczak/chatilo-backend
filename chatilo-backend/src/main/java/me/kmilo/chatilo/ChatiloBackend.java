@@ -29,8 +29,8 @@ public class ChatiloBackend implements CommandLineRunner {
         userRepository.save(UserEntity.builder()
                 .id("345")
                 .email("just.minias@gmail.com")
-                .username("Just")
-                .password("password")
+                .username("just")
+                .password("pass")
                 .build());
     }
 }

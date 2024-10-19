@@ -74,7 +74,7 @@ const App = () => {
     }, [])
 
     const onMessageReceived = (msg) => {
-        console.log('On message received: ', msg);
+        console.log('On message received: ', msg.body);
         setMessages(prevState => [...prevState, JSON.parse(msg.body)]);
     }
 
@@ -84,6 +84,8 @@ const App = () => {
 
     const sendMessage = () => {
         const msg = document.getElementById("inputMessage").value.trim();
+        var userName = AuthenticationService.getLoggedInUserName();
+        console.log("loggedUser: ",  userName)
 
         if (msg === '') {
             return;
@@ -92,7 +94,7 @@ const App = () => {
         wsClient.publish({
             destination: "/app/all", body: JSON.stringify({
                 message: msg,
-                from: loggedUser.username
+                from: userName
             })
         });
 
@@ -104,6 +106,7 @@ const App = () => {
             {
                 messages.map(message => (
                         <div className="message-field custom-font">
+                            <div>{message.from}</div>
                             <div>{message.message}</div>
                         </div>
                     )
@@ -130,7 +133,7 @@ const App = () => {
                             <div className="navbar-item">
                                 <div className="buttons">
                                     <a className="button is-danger is-light" id="logout"
-                                       onClick={AuthenticationService.logout}>
+                                       onClick={<AuthenticationService> </AuthenticationService>.logout}>
                                         <strong>Logout</strong>
                                     </a>
                                 </div>
