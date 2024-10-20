@@ -1,6 +1,7 @@
 package me.kmilo.chatilo;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import me.kmilo.chatilo.entity.UserEntity;
 import me.kmilo.chatilo.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@Slf4j
 public class ChatiloBackend implements CommandLineRunner {
 
     private final UserRepository userRepository;
@@ -19,18 +21,30 @@ public class ChatiloBackend implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userRepository.save(UserEntity.builder()
+
+        UserEntity kmilo = UserEntity.builder()
                 .id("123")
                 .email("kamil@email.com")
                 .username("kmilo")
                 .password("pass")
-                .build());
+                .build();
 
-        userRepository.save(UserEntity.builder()
+        userRepository.save(kmilo);
+
+        UserEntity just = UserEntity.builder()
                 .id("345")
                 .email("just.minias@gmail.com")
                 .username("just")
                 .password("pass")
-                .build());
+                .build();
+
+        just.addFriend(kmilo);
+
+        userRepository.save(just);
+
+        log.debug("kmilo: {}", kmilo.getFriends());
+
+        log.debug("just: {}", just.getFriends());
+
     }
 }
