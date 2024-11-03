@@ -28,6 +28,12 @@ const Login = ({isLoggedIn, setLoggedUser}) => {
         }
 
         AuthenticationService.executeBasicAuthenticationService(login, password)
+            .catch(error => {
+                console.log("Error logging", error.response.data.error)
+                AuthenticationService.logout()
+                isLoggedIn(false);
+                throw error;
+            })
             .then(response => {
                 AuthenticationService.registerSuccessfulLogin(login, password)
                 isLoggedIn(true)

@@ -10,4 +10,11 @@
     </root>
 
     <logger name="me.kmilo.chatilo" level="DEBUG" />
+    <logger name="org.hibernate.SQL" level="DEBUG" />
+
+    <logger name="org.springframework" level="DEBUG" />
+    <logger name="org.apache.coyote.http11.Http11InputBuffer" level="DEBUG" />
+    <logger name="org.apache.catalina.valves.RemoteIpValve" level="DEBUG" />
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="DEBUG" />
+
 </configuration>

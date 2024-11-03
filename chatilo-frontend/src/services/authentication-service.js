@@ -49,7 +49,7 @@ const getToken = () => sessionStorage.getItem('token');
 
 const AuthenticationService = {
     addAuthorizationHeaderToRequests,
-        executeBasicAuthenticationService,
+    executeBasicAuthenticationService,
     registerSuccessfulLogin,
     getLoggedInUserName,
     isUserLoggedIn,

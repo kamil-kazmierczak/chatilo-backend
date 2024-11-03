@@ -25,10 +25,10 @@ public class WebSecurityConfig {
                                                    AuthenticationProvider authenticationProvider) throws Exception {
         httpSecurity
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests((requests) -> requests
+                .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/chatilo-websocket/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/auth").permitAll()
+                        .requestMatchers("/chatilo-websocket/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
@@ -50,16 +50,16 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(UserService userService) {
+    public DaoAuthenticationProvider authenticationProvider(UserAuthenticationService userAuthenticationService) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userService);
+        authProvider.setUserDetailsService(userAuthenticationService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
 
     @Bean
-    public UserService userDetailsService(UserRepository userRepository) {
-        return new UserService(userRepository);
+    public UserAuthenticationService userDetailsService(UserRepository userRepository) {
+        return new UserAuthenticationService(userRepository);
     }
 
     @Bean

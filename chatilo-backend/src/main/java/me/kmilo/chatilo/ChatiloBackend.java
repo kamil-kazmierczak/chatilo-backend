@@ -2,7 +2,7 @@ package me.kmilo.chatilo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.kmilo.chatilo.entity.UserEntity;
+import me.kmilo.chatilo.entity.User;
 import me.kmilo.chatilo.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +22,7 @@ public class ChatiloBackend implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserEntity kmilo = UserEntity.builder()
+        User kmilo = User.builder()
                 .id("123")
                 .email("kamil@email.com")
                 .username("kmilo")
@@ -31,7 +31,7 @@ public class ChatiloBackend implements CommandLineRunner {
 
         userRepository.save(kmilo);
 
-        UserEntity just = UserEntity.builder()
+        User just = User.builder()
                 .id("345")
                 .email("just.minias@gmail.com")
                 .username("just")

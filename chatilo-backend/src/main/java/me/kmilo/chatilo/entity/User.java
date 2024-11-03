@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class UserEntity {
+public class User {
 
     @Id
     private String id;
@@ -30,14 +30,14 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "FRIEND_ID"))
     @Builder.Default
-    private Set<UserEntity> friends = new HashSet<>();
+    private Set<User> friends = new HashSet<>();
 
-    public void addFriend(UserEntity friend) {
+    public void addFriend(User friend) {
         getFriends().add(friend);
         friend.getFriends().add(this);
     }
 
-    public void removeFriend(UserEntity friend) {
+    public void removeFriend(User friend) {
         getFriends().remove(friend);
         friend.getFriends().remove(this);
     }
